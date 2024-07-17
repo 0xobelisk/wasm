@@ -1285,7 +1285,7 @@ dependencies = [
 [[package]]
 name = "sov-mock-zkvm"
 version = "0.3.0"
-source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=5363dc5dc09c3a799e3458a0ca8d7542c52e108a#5363dc5dc09c3a799e3458a0ca8d7542c52e108a"
+source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=9f8e7f02b05eb0053572482a6d98c6d74d5e984d#9f8e7f02b05eb0053572482a6d98c6d74d5e984d"
 dependencies = [
  "anyhow",
  "bincode",
@@ -1302,7 +1302,7 @@ dependencies = [
 [[package]]
 name = "sov-modules-api"
 version = "0.3.0"
-source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=5363dc5dc09c3a799e3458a0ca8d7542c52e108a#5363dc5dc09c3a799e3458a0ca8d7542c52e108a"
+source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=9f8e7f02b05eb0053572482a6d98c6d74d5e984d#9f8e7f02b05eb0053572482a6d98c6d74d5e984d"
 dependencies = [
  "anyhow",
  "bech32",
@@ -1324,7 +1324,7 @@ dependencies = [
 [[package]]
 name = "sov-modules-macros"
 version = "0.3.0"
-source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=5363dc5dc09c3a799e3458a0ca8d7542c52e108a#5363dc5dc09c3a799e3458a0ca8d7542c52e108a"
+source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=9f8e7f02b05eb0053572482a6d98c6d74d5e984d#9f8e7f02b05eb0053572482a6d98c6d74d5e984d"
 dependencies = [
  "anyhow",
  "bech32",
@@ -1343,7 +1343,7 @@ dependencies = [
 [[package]]
 name = "sov-risc0-adapter"
 version = "0.3.0"
-source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=5363dc5dc09c3a799e3458a0ca8d7542c52e108a#5363dc5dc09c3a799e3458a0ca8d7542c52e108a"
+source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=9f8e7f02b05eb0053572482a6d98c6d74d5e984d#9f8e7f02b05eb0053572482a6d98c6d74d5e984d"
 dependencies = [
  "anyhow",
  "bincode",
@@ -1364,7 +1364,7 @@ dependencies = [
 [[package]]
 name = "sov-rollup-interface"
 version = "0.3.0"
-source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=5363dc5dc09c3a799e3458a0ca8d7542c52e108a#5363dc5dc09c3a799e3458a0ca8d7542c52e108a"
+source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=9f8e7f02b05eb0053572482a6d98c6d74d5e984d#9f8e7f02b05eb0053572482a6d98c6d74d5e984d"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -1380,7 +1380,7 @@ dependencies = [
 [[package]]
 name = "sov-state"
 version = "0.3.0"
-source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=5363dc5dc09c3a799e3458a0ca8d7542c52e108a#5363dc5dc09c3a799e3458a0ca8d7542c52e108a"
+source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=9f8e7f02b05eb0053572482a6d98c6d74d5e984d#9f8e7f02b05eb0053572482a6d98c6d74d5e984d"
 dependencies = [
  "anyhow",
  "bcs",

@@ -13,11 +13,15 @@ serde = { version = "1.0.196", features = ["derive"] }
 borsh = { version = "1", features = ["derive"] }
 serde-wasm-bindgen = "0.6.5"
 
-sov-modules-api = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "5363dc5dc09c3a799e3458a0ca8d7542c52e108a" }
-sov-rollup-interface = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "5363dc5dc09c3a799e3458a0ca8d7542c52e108a" }
+sov-modules-api = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "9f8e7f02b05eb0053572482a6d98c6d74d5e984d" }
+sov-rollup-interface = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "9f8e7f02b05eb0053572482a6d98c6d74d5e984d" }
 
-sov-risc0-adapter = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "5363dc5dc09c3a799e3458a0ca8d7542c52e108a" }
-sov-mock-zkvm = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "5363dc5dc09c3a799e3458a0ca8d7542c52e108a" }
+sov-risc0-adapter = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "9f8e7f02b05eb0053572482a6d98c6d74d5e984d" }
+sov-mock-zkvm = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "9f8e7f02b05eb0053572482a6d98c6d74d5e984d" }
+
+
+#demo-stf = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "9f8e7f02b05eb0053572482a6d98c6d74d5e984d" }
+
 web-sys = { version = "0.3", features = ["console"] }
 
 

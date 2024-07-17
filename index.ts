@@ -1,36 +1,12 @@
 import * as wasm from './external/sov-wasm/pkg'
-// import { Wallet } from "ethers";
 import {Ed25519Keypair} from "@0xobelisk/sui-client";
-import {bytesToHex, remove0x} from "@metamask/utils";
 
-const cleanPublicKeyResponse = (metamaskPublicKeyResponse: any) => {
-    // Slicing is to skip the key byte flags prefix, which Metamask prepends the public key with.
-    return remove0x(metamaskPublicKeyResponse).slice(2);
+// Function to base64 encode a Uint8Array
+const toBase64 = (arr: Uint8Array) => {
+    return Buffer.from(arr).toString('base64');
 };
 
 (async () => {
-    const { sign } = await import('@noble/ed25519');
-    // const ed25519 = await import('@noble/ed25519');
-    // // 创建一个 MyData 对象
-    // const myData = { field1: "Hello", field2: 42 };
-    //
-    // // 序列化对象
-    // const serializedData: Uint8Array = wasm.serialize(myData);
-    // console.log('Serialized data:', serializedData);
-    //
-    // // 反序列化数据
-    // const deserializedData: any = wasm.deserialize(serializedData);
-    // console.log('Deserialized data:', deserializedData);
-    // const json_call = {
-    //     "Mint": {
-    //         "coins": {
-    //             "amount": 3000,
-    //             "token_id": "token_1rwrh8gn2py0dl4vv65twgctmlwck6esm2as9dftumcw89kqqn3nqrduss6"
-    //         },
-    //         "mint_to_address": "sov15vspj48hpttzyvxu8kzq5klhvaczcpyxn6z6k0hwpwtzs4a6wkvqwr57gc"
-    //     }
-    // }
-
     const json_call = {
         "CreateToken": {
             "salt": 11,
@@ -43,9 +19,6 @@ const cleanPublicKeyResponse = (metamaskPublicKeyResponse: any) => {
             ]
         }
     }
-
-
-
 
     // const json_call = '{"bank":{"CreateToken":{"salt":11,"token_name":"sov-test-token","initial_balance":1000000,"minter_address":"sov15vspj48hpttzyvxu8kzq5klhvaczcpyxn6z6k0hwpwtzs4a6wkvqwr57gc","authorized_minters":["sov1l6n2cku82yfqld30lanm2nfw43n2auc8clw7r5u5m6s7p8jrm4zqrr8r94","sov15vspj48hpttzyvxu8kzq5klhvaczcpyxn6z6k0hwpwtzs4a6wkvqwr57gc"]}}}'
     const serializeCall = wasm.serialize_call(json_call)
@@ -76,11 +49,7 @@ const cleanPublicKeyResponse = (metamaskPublicKeyResponse: any) => {
         121, 253, 9, 234, 159, 91, 96, 212, 211, 158, 135, 225, 180, 36, 104, 253
     ])
     const test_keypair = Ed25519Keypair.fromSecretKey(test_private_key, { skipValidation: true });
-    // console.log(test_keypair)
 
-    // const keypair = new Ed25519Keypair();
-    // const pub_key = keypair.getPublicKey().toRawBytes()
-    // const signature = await keypair.sign(unsigned_tx)
     const pub_key = test_keypair.getPublicKey().toRawBytes()
     const signature = await test_keypair.sign(unsigned_tx)
 
@@ -88,32 +57,51 @@ const cleanPublicKeyResponse = (metamaskPublicKeyResponse: any) => {
     let tx = wasm.serialize_to_signed_tx(unsigned_tx,pub_key,signature)
     console.log(tx)
 
-    // console.log(de_unsigned_tx)
+    // Convert the tx to a Base64 string
+    const txBase64 = toBase64(tx);
 
-    // const wallet = Wallet.createRandom();
-    // // 获取私钥
-    // const privateKey = wallet.privateKey;
-    // console.log(`Private Key: ${privateKey}`);
-    //
-    // // 获取公钥
-    // const pub_key = wallet.publicKey;
-    // console.log(`ETH Public Key: ${pub_key}`);
-    //
-    // // const signature = sign(unsigned_tx, privateKey);
-    //
-    // console.log("signature",signature)
-
-    // const signed_Transaction = {
-    //     signature:{
-    //         msg_sig:signature
-    //     },
-    //     pub_key,
-    //     ...unsigned_transaction
+    // Prepare the request payload
+    // const payload = {
+    //     body: txBase64
     // };
-    // let signed_tx = wasm.serialize_signed_transaction(signed_Transaction)
-    // let de_signed_tx = wasm.deserialize_signed_transaction(signed_tx)
     //
-    // console.log(signed_tx)
-    // console.log(de_signed_tx)
+    // console.log(txBase64)
+    // // Send the transaction to the /txs endpoint
+    // const response = await fetch('http://localhost:12346/sequencer/txs', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(payload)
+    // });
+    //
+    // if (response.ok) {
+    //     const result = await response.json();
+    //     console.log('Transaction submitted successfully:', result);
+    // } else {
+    //     console.error('Failed to submit transaction:', response.status, response.statusText);
+    // }
+
+    // Prepare the batch payload
+    const batchPayload = {
+        transactions: [txBase64] // You can add more transactions here
+    };
+
+    // Send the batch to the /batches endpoint
+    const response = await fetch('http://localhost:12346/sequencer/batches', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(batchPayload)
+    });
+
+    if (response.ok) {
+        const result = await response.json();
+        console.log('Batch submitted successfully:', result);
+    } else {
+        const errorDetails = await response.json();
+        console.error('Failed to submit batch:', response.status, response.statusText, JSON.stringify(errorDetails, null, 2));
+    }
 
 })();

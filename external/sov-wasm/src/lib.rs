@@ -12,12 +12,15 @@ use sov_modules_api::default_spec::DefaultSpec;
 use sov_modules_api::Spec;
 use sov_rollup_interface::zk::CryptoSpec;
 use sov_modules_api::transaction::{UnsignedTransaction,Transaction};
+
 pub type CSpec = <ZkSpec as Spec>::CryptoSpec;
 pub type ZkSpec = DefaultSpec<Risc0Verifier, MockZkVerifier, Zk>;
 pub type UnsignedTx = UnsignedTransaction<ZkSpec>;
 pub type SignedTx = Transaction<ZkSpec>;
 pub type PublicKey = <CSpec as CryptoSpec>::PublicKey;
 pub type Signature = <CSpec as CryptoSpec>::Signature;
+
+// pub type AuthenticatedTransaction = AuthenticatedTransactionData<ZkSpec>;
 
 #[wasm_bindgen]
 extern "C" {
@@ -94,6 +97,22 @@ pub fn serialize_to_signed_tx(data: &[u8],pub_key:&[u8],signature:&[u8]) -> Vec<
     BorshSerialize::serialize(&tx, &mut utx_bytes).unwrap();
     utx_bytes
 }
+
+// #[wasm_bindgen]
+// pub fn serialize_authenticated_tx(tx: &[u8]) -> Vec<u8> {
+//     let utx: SignedTx = Transaction::try_from_slice(tx).unwrap();
+//
+//     console::log_1(&JsValue::from_str(&format!("Signed Transaction: {:?}", utx)));
+//
+//
+//     let authenticated_tx:AuthenticatedTransaction = AuthenticatedTransactionData::from(utx);
+//
+//
+//     let mut utx_bytes: Vec<u8> = Vec::new();
+//     BorshSerialize::serialize(&authenticated_tx, &mut utx_bytes).unwrap();
+//     utx_bytes
+// }
+
 
 #[wasm_bindgen]
 pub fn serialize_pub_key(pub_key:&[u8]) -> Vec<u8> {
