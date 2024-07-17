@@ -32,41 +32,25 @@ const cleanPublicKeyResponse = (metamaskPublicKeyResponse: any) => {
 const call = '{"bank":{"CreateToken":{"salt":11,"token_name":"sov-test-token","initial_balance":1000000,"minter_address":"sov15vspj48hpttzyvxu8kzq5klhvaczcpyxn6z6k0hwpwtzs4a6wkvqwr57gc","authorized_minters":["sov1l6n2cku82yfqld30lanm2nfw43n2auc8clw7r5u5m6s7p8jrm4zqrr8r94","sov15vspj48hpttzyvxu8kzq5klhvaczcpyxn6z6k0hwpwtzs4a6wkvqwr57gc"]}}}'
 
 
-// const wasm = new SovWasm();
 const main = async () => {
-	const wasm = await import('./external/sov-wasm/pkg1/sov_wasm');
+	const keypair = new Ed25519Keypair();
+	const signature = await keypair.sign(new Uint8Array())
 
-	const myData = {
-		field1: 'Hello',
-		field2: 42,
-	};
+	console.log("signature",signature)
+	const wallet = Wallet.createRandom();
+	// 获取私钥
+	const privateKey = wallet.privateKey;
+	console.log(`Private Key: ${privateKey}`);
 
-	// 序列化数据
-	const serializedData = wasm.serialize(myData);
-	console.log('Serialized:', new Uint8Array(serializedData));
+	// 获取公钥
+	const publicKey = wallet.publicKey;
+	console.log(`ETH Public Key: ${publicKey}`);
 
-	// 反序列化数据
-	const deserializedData = wasm.deserialize(serializedData);
-	console.log('Deserialized:', deserializedData);
-
-	// const keypair = new Ed25519Keypair();
-	// const signature = await keypair.sign(new Uint8Array())
-	//
-	// console.log("signature",signature)
-	// const wallet = Wallet.createRandom();
-	// // 获取私钥
-	// const privateKey = wallet.privateKey;
-	// console.log(`Private Key: ${privateKey}`);
-	//
-	// // 获取公钥
-	// const publicKey = wallet.publicKey;
-	// console.log(`ETH Public Key: ${publicKey}`);
-	//
-	// const pk = bytesToHex(keypair.getPublicKey().toRawBytes());
-	// console.log(`Sui Public Key: ${pk}`);
-	// const new_pk = cleanPublicKeyResponse(publicKey);
-	// const bech32Address = pubkeyToBech32(new_pk);
-	// console.log(bech32Address);
+	const pk = bytesToHex(keypair.getPublicKey().toRawBytes());
+	console.log(`Sui Public Key: ${pk}`);
+	const new_pk = cleanPublicKeyResponse(publicKey);
+	const bech32Address = pubkeyToBech32(new_pk);
+	console.log(bech32Address);
 
 
 };
